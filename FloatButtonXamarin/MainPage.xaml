@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Xamarin.CommunityToolkit.UI.Views;assembly=Xamarin.CommunityToolkit"
+             xmlns:local="clr-namespace:FloatButtonXamarin.Fonts"
+             x:Class="FloatButtonXamarin.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="Rotation" Value="180" />
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontFamily" Value="{StaticResource SolidFontFamily}" /> 
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+     <Grid RowDefinitions="2*, 8*" RowSpacing="0">
+         <Grid Grid.Row="0" BackgroundColor="DarkGoldenrod">
+             <Label Text="Hello World"
+                    FontSize="Large"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+        </Grid>
+         <Grid Grid.Row="1" BackgroundColor="DarkCyan">
+             <CollectionView />
+         </Grid>
+
+         <Grid Grid.RowSpan="2">
+             <Frame CornerRadius="30"
+                    Padding="15"
+                    Margin="0,0,15,40"
+                    HorizontalOptions="End"
+                    VerticalOptions="End">
+
+                 <views:Expander Rotation="180">
+
+                     <views:Expander.Header>
+                         <Label
+                             Style="{StaticResource LabelStyle}"
+                             Text="{x:Static local:Icon.Plus}">
+
+                             <Label.Triggers>
+                                 <DataTrigger
+                                     Binding="{Binding Source={RelativeSource AncestorType={x:Type views:Expander}}, Path=IsExpanded}"
+                                                       TargetType="Label" Value="True">
+                                        <Setter Property="Text" Value="{x:Static local:Icon.Bug}" />
+                                </DataTrigger>
+                             </Label.Triggers>
+
+                         </Label>
+                    </views:Expander.Header>
+
+                     <StackLayout>
+                         <Label Style="{StaticResource LabelStyle}"
+                                Text="{x:Static local:Icon.User}" />
+
+                         <Label Style="{StaticResource LabelStyle}"
+                                Text="{x:Static local:Icon.Qrcode}" />
+
+                         <Label Style="{StaticResource LabelStyle}"
+                                Text="{x:Static local:Icon.PhoneAlt}" />
+                    </StackLayout>
+
+                 </views:Expander>
+
+             </Frame>
+         </Grid>
+
+     </Grid>
+
+</ContentPage>
